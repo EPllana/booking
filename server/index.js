@@ -298,30 +298,36 @@ app.post('/api/bookings', async (req, res) => {
 
 // Cancel a booking (Admin - Protected)
 // Cancel a booking (Admin - Protected) + mark slot as available
+// Cancel a booking (Admin - Protected)
 app.delete('/api/bookings/:id', requireAdmin, async (req, res) => {
   try {
+    // Kontrollo lidhjen me MongoDB
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Datenbank nicht verbunden. Bitte MongoDB-Verbindung überprüfen.' });
     }
 
     const { id } = req.params;
 
-    // Fshi booking dhe kthe objektin e fshirë
+    // Fshi booking dhe merr dokumentin e fshirë
     const deletedBooking = await Booking.findByIdAndDelete(id);
 
     if (!deletedBooking) {
       return res.status(404).json({ error: 'Buchung nicht gefunden' });
     }
 
-    // Mark slot as available
+    // Opsionale: mark slot as available
     await AvailableSlot.findByIdAndUpdate(deletedBooking.slotId, { isAvailable: true });
 
-    res.json({ message: 'Buchung erfolgreich storniert und Slot freigegeben' });
+    res.json({ 
+      message: 'Buchung erfolgreich storniert und Slot freigegeben', 
+      bookingId: deletedBooking._id.toString() 
+    });
   } catch (error) {
     console.error('Error cancelling booking:', error);
     res.status(500).json({ error: 'Buchung konnte nicht storniert werden: ' + error.message });
   }
 });
+
 
 // Get available slots for booking (excludes already booked slots)
 // Get available slots for booking (excludes already booked slots) - Optimized
