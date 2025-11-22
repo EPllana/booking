@@ -74,7 +74,7 @@ function BookingsList({ adminToken, onLogout }) {
 
   const fetchBookings = useCallback(async () => {
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch('https://booking-nxbv.onrender.com/api/bookings', {
         headers: getAuthHeaders()
       })
 
@@ -106,7 +106,7 @@ function BookingsList({ adminToken, onLogout }) {
     }
 
     try {
-      const response = await fetch(`/api/bookings/${id}`, {
+      const response = await fetch(`https://booking-nxbv.onrender.com/api/bookings/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders()
       })
@@ -147,7 +147,7 @@ function BookingsList({ adminToken, onLogout }) {
 
   const handleLogout = useCallback(async () => {
     try {
-      await fetch('/api/admin/logout', {
+      await fetch('https://booking-nxbv.onrender.com/api/admin/logout', {
         method: 'POST',
         headers: getAuthHeaders()
       })

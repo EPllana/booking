@@ -12,7 +12,7 @@ function AdminLogin({ onLogin }) {
     setLoading(true)
 
     try {
-      const response = await fetch('/api/admin/login', {
+      const response = await fetch('https://booking-nxbv.onrender.com/api/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

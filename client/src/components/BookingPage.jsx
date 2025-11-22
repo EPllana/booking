@@ -50,7 +50,7 @@ function BookingPage() {
 
   const fetchAllSlots = useCallback(async () => {
     try {
-      const response = await fetch('/api/all-slots-status')
+      const response = await fetch('https://booking-nxbv.onrender.com/api/all-slots-status')
       if (!response.ok) {
         throw new Error(`Server error: ${response.status}`)
       }
@@ -88,7 +88,7 @@ function BookingPage() {
     }
 
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch('https://booking-nxbv.onrender.com/api/bookings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

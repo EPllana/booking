@@ -43,7 +43,7 @@ function AdminPanel({ adminToken, onLogout }) {
 
   const fetchSlots = useCallback(async () => {
     try {
-      const response = await fetch('/api/available-slots')
+      const response = await fetch('https://booking-nxbv.onrender.com/api/available-slots')
       if (!response.ok) {
         throw new Error(`Server error: ${response.status}`)
       }
@@ -76,7 +76,7 @@ function AdminPanel({ adminToken, onLogout }) {
     }
 
     try {
-      const response = await fetch('/api/available-slots', {
+      const response = await fetch('https://booking-nxbv.onrender.com/api/available-slots', {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify(newSlot)
@@ -109,7 +109,7 @@ function AdminPanel({ adminToken, onLogout }) {
     }
 
     try {
-      const response = await fetch(`/api/available-slots/${id}`, {
+      const response = await fetch(`https://booking-nxbv.onrender.com/api/available-slots/${id}`, {
         method: 'DELETE',
         headers: getAuthHeaders()
       })
@@ -163,7 +163,7 @@ function AdminPanel({ adminToken, onLogout }) {
 
   const handleLogout = useCallback(async () => {
     try {
-      await fetch('/api/admin/logout', {
+      await fetch('https://booking-nxbv.onrender.com/api/admin/logout', {
         method: 'POST',
         headers: getAuthHeaders()
       })
