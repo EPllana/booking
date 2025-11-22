@@ -417,6 +417,9 @@ app.use((err, req, res, next) => {
   console.error('Error stack:', err.stack);
   res.status(500).json({ error: 'Internal server error', message: err.message });
 });
+app.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
 
 app.listen(PORT, (err) => {
   if (err) {
