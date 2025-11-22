@@ -306,14 +306,12 @@ app.delete('/api/bookings/:id', requireAdmin, async (req, res) => {
 
     const { id } = req.params;
 
-    // Gjej booking
-    const deletedBooking = await Booking.findById(id);
+    // Fshi booking dhe kthe objektin e fshirë
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+
     if (!deletedBooking) {
       return res.status(404).json({ error: 'Buchung nicht gefunden' });
     }
-
-    // Fshi booking
-    await deletedBooking.remove();
 
     // Mark slot as available
     await AvailableSlot.findByIdAndUpdate(deletedBooking.slotId, { isAvailable: true });
